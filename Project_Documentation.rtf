@@ -1,0 +1,567 @@
+{\rtf1\ansi\deff0 {\fonttbl {\f0 Times New Roman;}}
+{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red255\green0\blue0;}
+
+\f0\fs24\b Laravel E-Commerce CMS Project Documentation\b0\par
+\par
+\b Table of Contents\b0\par
+1. Project Overview\par
+2. System Requirements\par
+3. Local Development Setup\par
+4. Docker Setup\par
+5. CMS Dashboard Access\par
+6. Environment Configuration\par
+7. API Documentation\par
+8. Database Schema\par
+9. Troubleshooting\par
+10. Additional Resources\par
+\par
+\b Project Overview\b0\par
+\par
+This is a Laravel-based E-Commerce Content Management System (CMS) built with modern web technologies. The application provides a comprehensive admin dashboard for managing products, categories, orders, users, and administrators.\par
+\par
+\b Key Features:\b0\par
+• Admin Dashboard: Complete CMS interface for managing all aspects of the e-commerce platform\par
+• User Management: Admin and user account management with role-based access\par
+• Product Management: Full CRUD operations for products and categories\par
+• Order Management: Order processing, status updates, and invoice generation\par
+• Shopping Cart: API-based cart functionality with checkout process\par
+• Authentication: Secure login system with Laravel Sanctum\par
+• Responsive Design: Modern UI built with Bootstrap and Tailwind CSS\par
+\par
+\b Technology Stack:\b0\par
+• Backend: Laravel 12.x (PHP 8.2+)\par
+• Frontend: Bootstrap 5, Tailwind CSS, Alpine.js\par
+• Database: MySQL 8.0 / SQLite\par
+• Authentication: Laravel Sanctum\par
+• Containerization: Docker & Docker Compose\par
+• Build Tools: Vite, NPM\par
+\par
+\b System Requirements\b0\par
+\par
+\b Minimum Requirements:\b0\par
+• PHP: 8.2 or higher\par
+• Composer: Latest version\par
+• Node.js: 18.x or higher\par
+• NPM: 8.x or higher\par
+• Database: MySQL 8.0+ or SQLite\par
+• Web Server: Apache/Nginx (or use Laravel's built-in server)\par
+\par
+\b Recommended Development Environment:\b0\par
+• Operating System: Windows 10/11, macOS, or Linux\par
+• IDE: VS Code, PhpStorm, or similar\par
+• Docker: Latest version (for containerized development)\par
+• Git: For version control\par
+\par
+\b Local Development Setup\b0\par
+\par
+\b Step 1: Clone the Repository\b0\par
+git clone <repository-url>\par
+cd demo\par
+\par
+\b Step 2: Install PHP Dependencies\b0\par
+composer install\par
+\par
+\b Step 3: Install Node.js Dependencies\b0\par
+npm install\par
+\par
+\b Step 4: Environment Configuration\b0\par
+Create a .env file in the project root:\par
+\par
+APP_NAME="Laravel E-Commerce CMS"\par
+APP_ENV=local\par
+APP_KEY=\par
+APP_DEBUG=true\par
+APP_URL=http://localhost:8000\par
+\par
+LOG_CHANNEL=stack\par
+LOG_DEPRECATIONS_CHANNEL=null\par
+LOG_LEVEL=debug\par
+\par
+# Database Configuration (Choose one)\par
+# For SQLite (Default)\par
+DB_CONNECTION=sqlite\par
+DB_DATABASE=/absolute/path/to/database/database.sqlite\par
+\par
+# For MySQL\par
+DB_CONNECTION=mysql\par
+DB_HOST=127.0.0.1\par
+DB_PORT=3306\par
+DB_DATABASE=demo\par
+DB_USERNAME=root\par
+DB_PASSWORD=\par
+\par
+# Mail Configuration\par
+MAIL_MAILER=smtp\par
+MAIL_HOST=mailpit\par
+MAIL_PORT=1025\par
+MAIL_USERNAME=null\par
+MAIL_PASSWORD=null\par
+MAIL_ENCRYPTION=null\par
+MAIL_FROM_ADDRESS="hello@example.com"\par
+MAIL_FROM_NAME="${APP_NAME}"\par
+\par
+# Cache Configuration\par
+CACHE_DRIVER=file\par
+FILESYSTEM_DISK=local\par
+QUEUE_CONNECTION=sync\par
+SESSION_DRIVER=file\par
+SESSION_LIFETIME=120\par
+\par
+# Redis Configuration (Optional)\par
+REDIS_HOST=127.0.0.1\par
+REDIS_PASSWORD=null\par
+REDIS_PORT=6379\par
+\par
+\b Step 5: Generate Application Key\b0\par
+php artisan key:generate\par
+\par
+\b Step 6: Database Setup\b0\par
+\par
+\b For SQLite (Recommended for Development):\b0\par
+# Create SQLite database file\par
+touch database/database.sqlite\par
+\par
+# Run migrations\par
+php artisan migrate\par
+\par
+# Seed the database (optional)\par
+php artisan db:seed\par
+\par
+\b For MySQL:\b0\par
+# Create database\par
+mysql -u root -p\par
+CREATE DATABASE demo;\par
+\par
+# Run migrations\par
+php artisan migrate\par
+\par
+# Seed the database (optional)\par
+php artisan db:seed\par
+\par
+\b Step 7: Create Storage Link\b0\par
+php artisan storage:link\par
+\par
+\b Step 8: Build Frontend Assets\b0\par
+# For development\par
+npm run dev\par
+\par
+# For production\par
+npm run build\par
+\par
+\b Step 9: Start Development Server\b0\par
+# Start Laravel development server\par
+php artisan serve\par
+\par
+# Or use the development script (includes queue worker and logs)\par
+composer run dev\par
+\par
+\b Note:\b0 The application will be available at http://localhost:8000\par
+\par
+\b Docker Setup\b0\par
+\par
+\b Prerequisites:\b0\par
+• Docker Desktop installed and running\par
+• Docker Compose v2.0+\par
+\par
+\b Step 1: Environment Configuration for Docker\b0\par
+Create a .env file with Docker-specific settings:\par
+\par
+APP_NAME="Laravel E-Commerce CMS"\par
+APP_ENV=local\par
+APP_KEY=\par
+APP_DEBUG=true\par
+APP_URL=http://localhost:6162\par
+\par
+# Database Configuration for Docker\par
+DB_CONNECTION=mysql\par
+DB_HOST=db\par
+DB_PORT=3306\par
+DB_DATABASE=demo\par
+DB_USERNAME=demo\par
+DB_PASSWORD=secret\par
+\par
+# Mail Configuration\par
+MAIL_MAILER=smtp\par
+MAIL_HOST=mailpit\par
+MAIL_PORT=1025\par
+MAIL_USERNAME=null\par
+MAIL_PASSWORD=null\par
+MAIL_ENCRYPTION=null\par
+MAIL_FROM_ADDRESS="hello@example.com"\par
+MAIL_FROM_NAME="${APP_NAME}"\par
+\par
+# Cache Configuration\par
+CACHE_DRIVER=file\par
+FILESYSTEM_DISK=local\par
+QUEUE_CONNECTION=sync\par
+SESSION_DRIVER=file\par
+SESSION_LIFETIME=120\par
+\par
+\b Step 2: Build and Start Containers\b0\par
+# Build and start all services\par
+docker-compose up -d --build\par
+\par
+# View logs\par
+docker-compose logs -f\par
+\par
+\b Step 3: Install Dependencies Inside Container\b0\par
+# Install PHP dependencies\par
+docker-compose exec app composer install\par
+\par
+# Install Node.js dependencies\par
+docker-compose exec node npm install\par
+\par
+# Build frontend assets\par
+docker-compose exec node npm run build\par
+\par
+\b Step 4: Application Setup\b0\par
+# Generate application key\par
+docker-compose exec app php artisan key:generate\par
+\par
+# Run database migrations\par
+docker-compose exec app php artisan migrate\par
+\par
+# Seed database (optional)\par
+docker-compose exec app php artisan db:seed\par
+\par
+# Create storage link\par
+docker-compose exec app php artisan storage:link\par
+\par
+\b Step 5: Access the Application\b0\par
+• Web Application: http://localhost:6162\par
+• Mailpit (Email Testing): http://localhost:8025\par
+• MySQL Database: localhost:3306\par
+\par
+\b Docker Services:\b0\par
+The Docker setup includes the following services:\par
+1. app: PHP-FPM container with Laravel application\par
+2. web: Nginx web server\par
+3. db: MySQL 8.0 database\par
+4. mailpit: Email testing tool\par
+5. node: Node.js container for frontend builds\par
+\par
+\b Useful Docker Commands:\b0\par
+# Stop all services\par
+docker-compose down\par
+\par
+# Stop and remove volumes\par
+docker-compose down -v\par
+\par
+# Rebuild specific service\par
+docker-compose build app\par
+\par
+# Execute commands in container\par
+docker-compose exec app php artisan migrate\par
+docker-compose exec node npm run dev\par
+\par
+# View service logs\par
+docker-compose logs app\par
+docker-compose logs web\par
+docker-compose logs db\par
+\par
+\b CMS Dashboard Access\b0\par
+\par
+\b Default Admin Account:\b0\par
+After running the database seeder, you can access the admin dashboard with:\par
+• URL: http://localhost:8000/admin/dashboard (local) or http://localhost:6162/admin/dashboard (Docker)\par
+• Email: admin@example.com\par
+• Password: password\par
+\par
+\b Dashboard Features:\b0\par
+\par
+\b 1. Main Dashboard (/admin/dashboard):\b0\par
+• Overview of system statistics\par
+• Recent orders and activities\par
+• Quick access to main features\par
+\par
+\b 2. User Management (/admin/users):\b0\par
+• View Users: List all registered users\par
+• Add User: Create new user accounts\par
+• Edit User: Modify user information\par
+• Delete User: Remove user accounts\par
+\par
+\b 3. Admin Management (/admin/admins):\b0\par
+• View Admins: List all admin accounts\par
+• Add Admin: Create new admin accounts\par
+• Edit Admin: Modify admin information\par
+• Delete Admin: Remove admin accounts\par
+\par
+\b 4. Category Management (/admin/categories):\b0\par
+• View Categories: List all product categories\par
+• Add Category: Create new categories\par
+• Edit Category: Modify category information\par
+• Delete Category: Remove categories\par
+\par
+\b 5. Product Management (/admin/products):\b0\par
+• View Products: List all products with filtering options\par
+• Add Product: Create new products with images and details\par
+• Edit Product: Modify product information\par
+• Delete Product: Remove products\par
+\par
+\b 6. Order Management (/admin/orders):\b0\par
+• View Orders: List all orders with status filtering\par
+• Add Order: Manually create orders\par
+• Edit Order: Modify order details and status\par
+• Delete Order: Remove orders\par
+• Generate Invoice: Create PDF invoices for orders\par
+\par
+\b Navigation Structure:\b0\par
+Dashboard\par
+├── Dashboard (Overview)\par
+├── User Management\par
+│   ├── Users\par
+│   └── Admins\par
+├── Product Management\par
+│   ├── Categories\par
+│   └── Products\par
+└── Order Management\par
+    └── Orders\par
+\par
+\b Access Control:\b0\par
+• All admin routes are protected by authentication middleware\par
+• Admin-specific routes require admin role verification\par
+• Regular users cannot access admin dashboard features\par
+\par
+\b Environment Configuration\b0\par
+\par
+\b Required Environment Variables:\b0\par
+\par
+\b Application Settings:\b0\par
+• APP_NAME: Application name\par
+• APP_ENV: Environment (local, production, testing)\par
+• APP_KEY: Application encryption key (auto-generated)\par
+• APP_DEBUG: Debug mode (false for production)\par
+• APP_URL: Application URL\par
+\par
+\b Database Configuration:\b0\par
+• DB_CONNECTION: Database driver (sqlite/mysql)\par
+• DB_HOST: Database host\par
+• DB_PORT: Database port\par
+• DB_DATABASE: Database name\par
+• DB_USERNAME: Database username\par
+• DB_PASSWORD: Database password\par
+\par
+\b Mail Configuration:\b0\par
+• MAIL_MAILER: Mail driver\par
+• MAIL_HOST: SMTP host\par
+• MAIL_PORT: SMTP port\par
+• MAIL_USERNAME: SMTP username\par
+• MAIL_PASSWORD: SMTP password\par
+• MAIL_FROM_ADDRESS: From email address\par
+\par
+\b Production Environment Considerations:\b0\par
+\par
+\b Security Settings:\b0\par
+APP_ENV=production\par
+APP_DEBUG=false\par
+APP_URL=https://yourdomain.com\par
+\par
+# Use strong database credentials\par
+DB_PASSWORD=your_secure_password\par
+\par
+# Configure proper mail settings\par
+MAIL_MAILER=smtp\par
+MAIL_HOST=your-smtp-server.com\par
+MAIL_PORT=587\par
+MAIL_USERNAME=your-email@domain.com\par
+MAIL_PASSWORD=your-email-password\par
+MAIL_ENCRYPTION=tls\par
+\par
+# Use Redis for better performance\par
+CACHE_DRIVER=redis\par
+SESSION_DRIVER=redis\par
+QUEUE_CONNECTION=redis\par
+\par
+\b API Documentation\b0\par
+\par
+\b Authentication Endpoints:\b0\par
+\par
+\b Register User:\b0\par
+POST /api/register\par
+Content-Type: application/json\par
+\par
+{\par
+    "name": "John Doe",\par
+    "email": "john@example.com",\par
+    "password": "password123",\par
+    "password_confirmation": "password123"\par
+}\par
+\par
+\b Login User:\b0\par
+POST /api/login\par
+Content-Type: application/json\par
+\par
+{\par
+    "email": "john@example.com",\par
+    "password": "password123"\par
+}\par
+\par
+\b Logout User:\b0\par
+POST /api/logout\par
+Authorization: Bearer {token}\par
+\par
+\b Cart Endpoints:\b0\par
+\par
+\b Get Cart:\b0\par
+GET /api/cart\par
+Authorization: Bearer {token}\par
+\par
+\b Add to Cart:\b0\par
+POST /api/cart/add-to-cart\par
+Authorization: Bearer {token}\par
+Content-Type: application/json\par
+\par
+{\par
+    "product_id": 1,\par
+    "quantity": 2\par
+}\par
+\par
+\b Checkout:\b0\par
+POST /api/cart/checkout\par
+Authorization: Bearer {token}\par
+Content-Type: application/json\par
+\par
+{\par
+    "shipping_address": "123 Main St, City, State 12345",\par
+    "payment_method": "credit_card"\par
+}\par
+\par
+\b Order Endpoints:\b0\par
+\par
+\b Get Orders:\b0\par
+GET /api/orders\par
+Authorization: Bearer {token}\par
+\par
+\b Update Order Status:\b0\par
+POST /api/orders/change-status\par
+Authorization: Bearer {token}\par
+Content-Type: application/json\par
+\par
+{\par
+    "order_id": 1,\par
+    "status": "shipped"\par
+}\par
+\par
+\b Database Schema\b0\par
+\par
+\b Core Tables:\b0\par
+\par
+\b Users Table:\b0\par
+• id (bigint, primary key)\par
+• name (varchar)\par
+• email (varchar, unique)\par
+• email_verified_at (timestamp)\par
+• password (varchar)\par
+• is_admin (boolean, default false)\par
+• created_at (timestamp)\par
+• updated_at (timestamp)\par
+\par
+\b Categories Table:\b0\par
+• id (bigint, primary key)\par
+• name (varchar)\par
+• description (text)\par
+• created_at (timestamp)\par
+• updated_at (timestamp)\par
+\par
+\b Products Table:\b0\par
+• id (bigint, primary key)\par
+• name (varchar)\par
+• description (text)\par
+• price (decimal)\par
+• category_id (bigint, foreign key)\par
+• image (varchar)\par
+• stock_quantity (integer)\par
+• created_at (timestamp)\par
+• updated_at (timestamp)\par
+\par
+\b Orders Table:\b0\par
+• id (bigint, primary key)\par
+• user_id (bigint, foreign key)\par
+• total_amount (decimal)\par
+• status (varchar)\par
+• shipping_address (text)\par
+• payment_method (varchar)\par
+• created_at (timestamp)\par
+• updated_at (timestamp)\par
+\par
+\b Troubleshooting\b0\par
+\par
+\b Common Issues and Solutions:\b0\par
+\par
+\b 1. Application Key Not Set:\b0\par
+Error: No application encryption key has been specified.\par
+Solution: php artisan key:generate\par
+\par
+\b 2. Database Connection Issues:\b0\par
+Error: SQLSTATE[HY000] [2002] Connection refused\par
+Solutions:\par
+• Check database credentials in .env file\par
+• Ensure database server is running\par
+• For Docker: Verify database container is running with docker-compose ps\par
+\par
+\b 3. Permission Issues (Linux/macOS):\b0\par
+Error: Permission denied when accessing storage\par
+Solution:\par
+sudo chown -R www-data:www-data storage bootstrap/cache\par
+sudo chmod -R 775 storage bootstrap/cache\par
+\par
+\b 4. Docker Container Issues:\b0\par
+Error: Container fails to start\par
+Solutions:\par
+• Check container logs: docker-compose logs app\par
+• Rebuild containers: docker-compose down && docker-compose up -d --build\par
+• Clear Docker cache: docker system prune -a\par
+\par
+\b Performance Optimization:\b0\par
+\par
+\b 1. Enable OPcache (Production):\b0\par
+Add to php.ini:\par
+opcache.enable=1\par
+opcache.memory_consumption=128\par
+opcache.max_accelerated_files=4000\par
+opcache.revalidate_freq=2\par
+\par
+\b 2. Use Redis for Caching:\b0\par
+CACHE_DRIVER=redis\par
+SESSION_DRIVER=redis\par
+QUEUE_CONNECTION=redis\par
+\par
+\b 3. Optimize Composer Autoloader:\b0\par
+composer dump-autoload --optimize\par
+\par
+\b 4. Clear Application Cache:\b0\par
+php artisan config:cache\par
+php artisan route:cache\par
+php artisan view:cache\par
+\par
+\b Additional Resources\b0\par
+\par
+\b Laravel Documentation:\b0\par
+• Laravel Official Documentation: https://laravel.com/docs\par
+• Laravel Sanctum Documentation: https://laravel.com/docs/sanctum\par
+• Laravel UI Documentation: https://laravel.com/docs/ui\par
+\par
+\b Development Tools:\b0\par
+• Composer Documentation: https://getcomposer.org/doc/\par
+• Docker Documentation: https://docs.docker.com/\par
+• NPM Documentation: https://docs.npmjs.com/\par
+\par
+\b Frontend Resources:\b0\par
+• Bootstrap Documentation: https://getbootstrap.com/docs/\par
+• Tailwind CSS Documentation: https://tailwindcss.com/docs\par
+• Alpine.js Documentation: https://alpinejs.dev/\par
+\par
+\b Support and Community:\b0\par
+• Laravel Community: https://laravel.com/community\par
+• Laracasts: https://laracasts.com/\par
+• Laravel News: https://laravel-news.com/\par
+\par
+\b Contact Information\b0\par
+\par
+For technical support or questions about this project, please contact:\par
+• Project Repository: [GitHub Repository URL]\par
+• Documentation: [Documentation URL]\par
+• Issues: [GitHub Issues URL]\par
+\par
+This documentation was generated for the Laravel E-Commerce CMS project. Please keep this document updated as the project evolves.\par
+}
